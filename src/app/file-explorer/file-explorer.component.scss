@@ -1,0 +1,36 @@
+:host {
+  overflow-y: overlay;
+  position: relative;
+}
+
+.table {
+  width: 100%;
+}
+
+tr.mat-row, tr.mat-footer-row {
+  height: 28px;
+}
+
+.table-node__icon {
+  font-size: 20px;
+}
+
+.cell-empty-message{
+  text-align: center;
+  padding: 40px;
+  color: #dbdbdb;
+}
+
+.example-loading-shade {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 56px;
+  right: 0;
+  background: #fff;
+  opacity: 0.8;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

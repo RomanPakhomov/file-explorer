@@ -1,0 +1,34 @@
+<mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
+  <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding>
+    <button mat-icon-button disabled></button>
+    <ng-container *ngTemplateOutlet="treeNodeName; context: { node:node }"></ng-container>
+  </mat-tree-node>
+  <mat-tree-node *matTreeNodeDef="let node;when: hasChild" matTreeNodePadding>
+    <button mat-icon-button matTreeNodeToggle
+            [attr.aria-label]="'Toggle ' + node.name"
+            (click)="getDirectories(node.path)">
+      <mat-icon class="mat-icon-rtl-mirror">
+        {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+      </mat-icon>
+    </button>
+    <ng-container *ngTemplateOutlet="treeNodeName; context: { node:node }"></ng-container>
+  </mat-tree-node>
+</mat-tree>
+
+<ng-template #treeNodeName let-node="node">
+  <div class="tree-node" (click)="selectPath(node.path)">
+    <mat-icon *ngIf="node.type == fsObjectType.drive"
+              class="file-type-icon">
+      donut_small
+    </mat-icon>
+    <mat-icon *ngIf="node.type == fsObjectType.file"
+              class="file-type-icon">
+      insert_drive_file
+    </mat-icon>
+    <mat-icon *ngIf="node.type == fsObjectType.directory"
+              class="file-type-icon">
+      folder
+    </mat-icon>
+    {{ node.name }}
+  </div>
+</ng-template>
