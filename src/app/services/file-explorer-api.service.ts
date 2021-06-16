@@ -3,13 +3,16 @@ import {Observable} from "rxjs";
 import {Injectable} from "@angular/core";
 import {IFSNodeExtendedInfo} from "../types/FSNodeExtendedInfo";
 import {SortDirection, SortMode} from "../types/SortAndFilterTypes";
+import { environment } from './../../environments/environment';
 
 @Injectable()
 export class FileExplorerApiService {
 
-  private basePath = 'http://95.79.31.124:5000/webfileexplorer';
+  private basePath: string;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    this.basePath = environment.api + '/webfileexplorer';
+  }
 
   public getDrivers(): Observable<IFSNodeExtendedInfo[]> {
     return this.http.get<IFSNodeExtendedInfo[]>(`${this.basePath}/filesystem/drives`);
